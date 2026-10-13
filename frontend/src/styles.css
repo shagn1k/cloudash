@@ -1,0 +1,190 @@
+:root {
+  --bg: #0b1220;
+  --bg-elevated: #111a2e;
+  --bg-inset: #0d1526;
+  --border: #1f2c47;
+  --text: #e6edf7;
+  --text-muted: #8b9ab5;
+  --accent: #38bdf8;
+  --ok: #34d399;
+  --warn: #fbbf24;
+  --bad: #f87171;
+  --radius: 14px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: radial-gradient(1200px 600px at 20% -10%, #14203a 0%, var(--bg) 60%);
+  background-attachment: fixed;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+h1, h2, p { margin: 0; }
+
+/* ---------- Top bar ---------- */
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px clamp(16px, 4vw, 40px);
+  border-bottom: 1px solid var(--border);
+  background: rgba(11, 18, 32, 0.8);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.topbar__brand { display: flex; align-items: center; gap: 12px; }
+.topbar__brand h1 { font-size: 1.25rem; letter-spacing: 0.01em; }
+.topbar__brand p { color: var(--text-muted); font-size: 0.8rem; }
+.topbar__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.topbar__updated { color: var(--text-muted); font-size: 0.8rem; }
+
+.mode {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid;
+}
+.mode--dev { color: var(--warn); border-color: rgba(251, 191, 36, 0.4); background: rgba(251, 191, 36, 0.08); }
+.mode--aws { color: var(--ok); border-color: rgba(52, 211, 153, 0.4); background: rgba(52, 211, 153, 0.08); }
+.mode--unknown { color: var(--text-muted); border-color: var(--border); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  background: var(--accent);
+  color: #04121f;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.btn:hover { filter: brightness(1.1); }
+.btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.btn--small { padding: 5px 12px; font-size: 0.8rem; }
+
+/* ---------- Layout ---------- */
+.dashboard {
+  display: grid;
+  gap: 20px;
+  padding: 24px clamp(16px, 4vw, 40px);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.dashboard__row {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+}
+.dashboard__row--wide { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+
+.panel {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  min-width: 0;
+}
+.panel__header { margin-bottom: 16px; }
+.panel__header h2 { font-size: 1rem; letter-spacing: 0.02em; }
+.panel__header p { color: var(--text-muted); font-size: 0.8rem; margin-top: 2px; }
+
+.grid { display: grid; gap: 12px; }
+.grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
+.grid--3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); }
+.grid--4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); }
+.grid--spaced { margin-top: 12px; }
+
+/* ---------- Items ---------- */
+.item {
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  min-width: 0;
+}
+.item__label { color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.item__hint { color: var(--text-muted); font-size: 0.75rem; }
+.metric { font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.metric__unit { font-size: 0.85rem; font-weight: 500; color: var(--text-muted); margin-left: 2px; }
+.text-value { font-size: 0.95rem; font-weight: 600; overflow-wrap: anywhere; }
+.text-value--mono { font-family: ui-monospace, 'SF Mono', Menlo, monospace; }
+
+/* ---------- Badges ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+.badge__dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.badge--ok { color: var(--ok); border-color: rgba(52, 211, 153, 0.35); background: rgba(52, 211, 153, 0.1); }
+.badge--ok .badge__dot { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6); animation: pulse 2s infinite; }
+.badge--warn { color: var(--warn); border-color: rgba(251, 191, 36, 0.35); background: rgba(251, 191, 36, 0.1); }
+.badge--bad { color: var(--bad); border-color: rgba(248, 113, 113, 0.35); background: rgba(248, 113, 113, 0.1); }
+.badge--neutral { color: var(--text-muted); border-color: var(--border); background: rgba(139, 154, 181, 0.08); }
+
+@keyframes pulse {
+  70% { box-shadow: 0 0 0 7px rgba(52, 211, 153, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+/* ---------- Loading / error states ---------- */
+.skeleton { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.skeleton span {
+  height: 64px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--bg-inset) 25%, #16223b 50%, var(--bg-inset) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+.state {
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.state--error { border: 1px solid rgba(248, 113, 113, 0.35); background: rgba(248, 113, 113, 0.07); }
+.state--error strong { color: var(--bad); }
+.state p { color: var(--text-muted); font-size: 0.85rem; }
+.stale-warning {
+  color: var(--warn);
+  font-size: 0.8rem;
+  margin-bottom: 12px;
+}
+
+.footer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  padding: 8px 16px 32px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge__dot, .skeleton span { animation: none !important; }
+}
